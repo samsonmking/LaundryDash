@@ -13,6 +13,7 @@
     "jquery": "^3.1.1",
     "lodash": "^4.17.2",
     "node-dash-button": "^0.6.1",
+    "pushbullet": "^1.4.3",
     "rxjs": "^5.0.0-rc.5",
     "socket.io": "^1.7.1"
   }
