@@ -9,6 +9,7 @@ const http = require('http').Server(app)
 const io = require('socket.io')(http)
 const PushBullet = require('pushbullet')
 const pusher = new PushBullet(pushToken)
+const moment = require('moment');
 
 app.use(express.static('public'))
 app.use(express.static('node_modules/jquery/dist'))
@@ -60,12 +61,12 @@ washUpdates$.subscribe(data => {
 
 // Pushbullet state change notification
 washMode$.subscribe(d => {
-	pusher.note({}, 'Laundry ' + d.state, '')
+	pusher.note({}, 'Laundry ' + d.state, moment().format('h:mm:ss a'))
 })
 
 // Pushbullet Complete Notification
 washUpdates$
 	.filter(u => u.count == 0)
 	.subscribe(d => {
-		pusher.note({}, 'Laundry ' + d.state + ' Complete', '')
+		pusher.note({}, 'Laundry ' + d.state + ' Complete', moment().format('h:mm:ss a'))
 	})
